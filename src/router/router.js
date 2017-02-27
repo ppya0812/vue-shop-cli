@@ -22,20 +22,3 @@ export default [{
         // },
     ]
 }]
-// export default [{
-//     path: '/',
-//     component: App,  //顶层路由，对应index.html
-//     children: [
-//         { path: '', redirect: '/home' },               //地址为空时跳转home页面
-//         { path: '/home', component: home },            //首页
-//         { path: '/shop', component: shop },            //购物
-//         // { path: '/shop', component: shop ,
-//         //     children: [
-//         //         {
-//         //             path: 'rating',
-//         //             component: rating,
-//         //         }
-//         //     ]
-//         // },
-//     ]
-// }]

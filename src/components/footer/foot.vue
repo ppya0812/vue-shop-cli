@@ -20,21 +20,18 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    @import '../../style/mixin.scss';
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        @include flex(center);
-        border-top: 1px solid rgba(0,0,0,.1);
-    }
-    .footer-item {
-        flex: 1;
-        text-align: center;
-        line-height: 2em;
-        font-size: 1.6rem;
-    }
-
+<style lang="sass?indentedSyntax" scoped>
+    @import "../../style/base.sass"
+    .footer
+        position: fixed
+        left: 0
+        bottom: 0
+        width: 100%
+        display: flex
+        border-top: 1px solid rgba(0,0,0,.1)
+    .footer-item
+        flex: 1
+        text-align: center
+        line-height: 3.2rem
+        font-size: 1.4rem
 </style>

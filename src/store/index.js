@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import mutations from './mutations'
 import actions from './action'
 import getters from './getters'
+import mutations from './mutations'
 
 Vue.use(Vuex)
 
 const state = {
-	latitude: '', // 当前位置纬度
-	longitude: '', // 当前位置经度
-	cartList: {}, // 加入购物车的商品列表
+	userInfo: {
+		name: 'ppya'
+	},
+	todoList: [
+      { id: 1, text: '1...haha', done: true },
+      { id: 2, text: '2...lala', done: true },
+      { id: 3, text: '3...xixi', done: false }
+  ],
+  count: 1
 }
 
 export default new Vuex.Store({
