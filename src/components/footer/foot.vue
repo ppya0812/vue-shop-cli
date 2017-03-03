@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-      <router-link :to="v.link" tag="div" v-for="v in list" class="footer-item">
+      <router-link :to="v.link" tag="div" v-for="(v, i) in list" key="i" class="footer-item">
           {{v.page}}
       </router-link>
   </div>
@@ -11,9 +11,9 @@ export default {
     data() {
         return {
             list: [
-                { page: '首页', link: 'home'},
-                { page: '购物', link: '/shop'},
-                { page: '我的', link: '/my'}
+                {page: '首页', link: 'home'},
+                {page: '购物', link: '/shop'},
+                {page: '我的', link: '/my'}
             ]
         }
     }

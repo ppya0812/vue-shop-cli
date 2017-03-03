@@ -1,77 +1,83 @@
-import {baseUrl} from './env'
+'use strict';
+/*
+* use method
+* fetch().get(url, data)
+*.then()
+*  .catch()
+*/
 
-export default async (type = 'GET', url = '', data = {}) => {
-	type = type.toUpperCase();
-	url = baseUrl + url;
+const param = require('jquery-param');  // for 深度解析
 
-	if (type == 'GET') {
-		let dataStr = ''; //数据拼接字符串
-		Object.keys(data).forEach(key => {
-			// dataStr += key + '=' + data[key] + '&';
-			dataStr +=`${key}=${data[key]}&`;
-		})
+function isObject(data) {
+    return Object.prototype.toString.call(data) === '[object Object]' ||
+           Object.prototype.toString.call(data) === '[object Array]';
+}
 
-		if (dataStr !== '') {
-			dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
-			url = url + '?' + dataStr;
-		}
-	}
+function hasContentType(headers) {
+    return Object.keys(headers).some(function (name) {
+        return name.toLowerCase() === 'content-type';
+    });
+}
 
-	if (window.fetch) {
-		let requestConfig = {
-			credentials: 'include',
-		  	method: type,
-		  	headers: {
-		      	'Accept': 'application/json',
-	  			'Content-Type': 'application/json'
-		  	},
-		  	mode: "cors",
-		  	cache: "only-if-cached"
-		}
+function setHeaders(xhr, headers) {
+    headers = headers || {};
 
-		if (type == 'POST') {
-			Object.defineProperty(requestConfig, 'body', {
-				value: JSON.stringify(data)
-			})
-		}
+    if (!hasContentType(headers)) {
+        headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
 
-		try {
-			var response = await fetch(url, requestConfig);
-			var responseJson = await response.json();
-		}catch (error){
-			throw new Error(error)
-		}
+    Object.keys(headers).forEach(function (name) {
+        xhr.setRequestHeader(name, headers[name]);
+    });
+}
 
-		return responseJson
-	}else{
-		let requestObj;
-		if (window.XMLHttpRequest) {
-			requestObj = new XMLHttpRequest();
-		} else {
-			requestObj = new ActiveXObject;
-		}
+function xhrConnection(type, url, data, options) {
+    if (isObject(data)) {
+        data = param(data);
+    }
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        if (type === 'get') {
+            url = url.replace(/#.*$/, '');
+            let divider = url.indexOf('?') !== -1 ? '&' : '?';
+            url = [url, data].join(divider);
+            data = null;
+        }
 
-		let sendData = '';
-		if (type == 'POST') {
-			sendData = JSON.stringify(data);
-		}
+        xhr.open(type, url || '', true);
+        setHeaders(xhr, options.headers);
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                let result;
+                try {
+                    result = JSON.parse(xhr.responseText);
+                } catch (e) {
+                    window.wmErrorReport && window.wmErrorReport(e);
+                    result = xhr.responseText;
+                }
+                resolve(result);
+            } else {
+                reject(Error(xhr.statusText));
+            }
+        };
+        xhr.onerror = function () {
+            reject(Error('Network Error'));
+        };
+        xhr.send(data);
+    });
+}
 
-		requestObj.open(type, url, true);
-		requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		requestObj.send(sendData);
+export default function Ajax(options) {
+    options = options || {};
 
-		requestObj.onreadystatechange = () => {
-			if (requestObj.readyState == 4) {
-				if (requestObj.status == 200) {
-					let obj = requestObj.response
-					if (typeof obj !== 'object') {
-						obj = JSON.parse(obj);
-					}
-					return obj
-				}else {
-					throw new Error(requestObj)
-				}
-			}
-		}
-	}
+    let ajax = {};
+
+    let httpMethods = ['get', 'post', 'put', 'delete'];
+
+    httpMethods.forEach(function (method) {
+        ajax[method] = function (url, data) {
+            return xhrConnection(method, url, data, options);
+        };
+    });
+    return ajax;
 }

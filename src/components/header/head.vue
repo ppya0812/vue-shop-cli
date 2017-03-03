@@ -11,20 +11,18 @@
 </template>
 
 <script>
-
-    export default {
-    	data(){
-            return{
-                isBack: true
-            }
-        },
-        methods: {
-            goBack() {
-                this.$router.go(-1)
-            }
-        }
-    }
-
+  export default {
+      data() {
+          return {
+              isBack: true
+          }
+      },
+      methods: {
+          goBack() {
+              this.$router.go(-1)
+          }
+      }
+  }
 </script>
 
 <style lang="sass?indentedSyntax" scoped>

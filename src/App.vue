@@ -11,13 +11,14 @@
 <script>
 import Foot from './components/footer/foot'
 import HeadTop from './components/header/head'
+
 export default {
     components: {
         Foot,
-		HeadTop
+        HeadTop
     },
-	mounted() {
-		document.cookie = 'cuid=2AD442BA33F809FD94289E05FCEBACC4|36515060005553; expires=Thu, 01 Jan 2970 00:00:00 GMT';
+    mounted() {
+        document.cookie = 'cuid=2AD442BA33F809FD94289E05FCEBACC4|36515060005553; expires=Thu, 01 Jan 2970 00:00:00 GMT';
     }
 }
 </script>

@@ -7,20 +7,20 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-	userInfo: {
-		name: 'ppya'
-	},
-	todoList: [
-      { id: 1, text: '1...haha', done: true },
-      { id: 2, text: '2...lala', done: true },
-      { id: 3, text: '3...xixi', done: false }
-  ],
-  count: 1
+    userInfo: {
+        name: 'ppya'
+    },
+    todoList: [
+        { id: 1, text: '1...haha', done: true },
+        { id: 2, text: '2...lala', done: true },
+        { id: 3, text: '3...xixi', done: false }
+    ],
+    count: 1
 }
 
 export default new Vuex.Store({
-	state,
-	getters,
-	actions,
-	mutations
+    state,
+    getters,
+    actions,
+    mutations
 })

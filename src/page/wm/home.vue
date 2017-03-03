@@ -13,7 +13,9 @@
 </template>
 
 <script>
-import { json2url } from '../../utils/mUtils'
+// import { json2url } from '../../utils/mUtils'
+// import fetch from '../../utils/fetch';
+
 export default {
     data() {
         return {
@@ -45,9 +47,17 @@ export default {
             type: 'getUserInfo',
             age: 18
         })
-        this.$store.getters.filterList;
-        this.$http.get('http://c1.ifengimg.com/mappa/2016/11/23/71d3386025c4adf30bcc07948a5632df.jpg').then(res => {
-            this.banner = res.url;
+        // this.$store.getters.filterList;
+        this.fetch()
+        .get('/h5ui/shoplist', {
+            // lat: 4844695.33793,
+            // lng: 1.2948232959996E7,
+            // city_id: 131,
+            // shoplist_only: 0,
+            // taste: 10,
+            // page_fro: 'new_fresh'
+        }).then(res => {
+            console.log('res', res);
         })
     }
 }
