@@ -1,26 +1,27 @@
 <template>
     <div class="head-top">
         <!-- <slot name="search"></slot> -->
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1" v-if="isBack" v-tap="{callback: goBack}" class="head-back">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1" v-if="headInfo.back" v-tap="{callback: goBack}" class="head-back">
             <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgba(255,255,255,1);stroke-width:2" />
         </svg>
         <div class="head-title">
-            title
+            {{headInfo.title}}
         </div>
     </div>
 </template>
 
 <script>
   export default {
-      data() {
-          return {
-              isBack: true
-          }
+      props: {
+          headInfo: Object
       },
       methods: {
           goBack() {
               this.$router.go(-1)
           }
+      },
+      mounted() {
+          // console.log(this.$route.path)
       }
   }
 </script>
