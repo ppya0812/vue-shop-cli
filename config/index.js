@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/dist/',  // 服務器訪問dist文件中html內部js.css文件路徑
-    productionSourceMap: true,
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -28,10 +28,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: { // 接口訪問代理
-        '/h5ui/': {
-            target: online,
-            changeOrigin: true
-        }
+      '/h5ui/': {
+        target: online,
+        changeOrigin: true
+      }
     },
     autoOpenBrowser: true,
     // CSS Sourcemaps off by default because relative paths are "buggy"
