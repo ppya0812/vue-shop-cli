@@ -1,26 +1,29 @@
 <template>
     <div class="home">
-        {{count}} <button v-tap="{callback: add}">点我呀加加加</button>
-        <div class="">
-            我是{{userInfo.name}}， 今年{{userInfo.age}}，哈哈哈啊~
+        <div class="info">
+            我是{{userInfo.name}}， 今年{{count}}，哈哈哈~<button v-tap="{callback: add}">点我呀</button>
         </div>
-
-        <div class="" v-for="v in list">
-            {{v.text}}
+        <category :categoryList="categoryList"></category>
+        <div class="menu">
+            <Nothing></Nothing>
         </div>
-        <img :src="banner" alt="">
     </div>
 </template>
 
 <script>
 // import { json2url } from '../../utils/mUtils'
 // import fetch from '../../utils/fetch';
+import Nothing from '../../components/Nothing'
+import Category from '../../components/Category'
 
 export default {
     data() {
         return {
-            banner: ''
         }
+    },
+    components: {
+        Nothing,
+        Category
     },
     computed: {
         count() {
@@ -31,6 +34,9 @@ export default {
         },
         list() {
             return this.$store.getters.filterList
+        },
+        categoryList () {
+            return this.$store.state.categoryList
         }
     },
     methods: {
@@ -49,14 +55,7 @@ export default {
         })
         // this.$store.getters.filterList;
         this.fetch()
-        .get('/h5ui/shoplist', {
-            // lat: 4844695.33793,
-            // lng: 1.2948232959996E7,
-            // city_id: 131,
-            // shoplist_only: 0,
-            // taste: 10,
-            // page_fro: 'new_fresh'
-        }).then(res => {
+        .get('/h5ui/shoplist', {}).then(res => {
             console.log('res', res);
         })
     }
@@ -66,4 +65,15 @@ export default {
 <style lang="sass?indentedSyntax" scoped>
     .home
         line-height: 2rem
+        position: relative
+        display: flex
+    .info
+        position: absolute
+        right: 1rem
+        top: 4rem
+        button
+            background: #007AFF
+            color: #fff
+    .menu
+        flex: 1
 </style>

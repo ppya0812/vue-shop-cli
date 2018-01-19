@@ -45,6 +45,6 @@ export default {
 </script>
 
 <style lang="sass?indentedSyntax">
-	.conatiner
+	.conatiner 
 		padding-top: 3.2rem
 </style>

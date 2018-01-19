@@ -38,7 +38,8 @@
         text-align: center
         font-size: 2rem
         background: $bg-default
-        color: #fff;
+        color: #fff
+        z-index: 100
     .head-back
         width: 2em
         height: 100%

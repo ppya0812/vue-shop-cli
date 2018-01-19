@@ -1,12 +1,12 @@
 <template>
-    <div class="">
+    <div class="wmshop">
         wmshop
     </div>
 </template>
 
 <script>
 export default {
-    data() {
+    data () {
         return {
         }
     },
