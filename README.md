@@ -23,11 +23,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + svg. (支持反向
 |       |-- header                      // 头部公共组件
 |
 |   |-- pages                        // 页面组件
-|       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
-|       |-- login                    // 登陆注册页
-|       |-- search                   // 搜索页
-|       |-- shop                     // 商铺筛选页
+|       |-- myshop                   // 购物页
 |       |-- my                       // 我的
 |
 |   |-- plugins                      // 引用的插件
